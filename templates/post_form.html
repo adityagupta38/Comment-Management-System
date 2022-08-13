@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+</head>
+{% extends 'base_home.html' %}
+<body>
+{% load widget_tweaks %}
+{%  block content %}
+    <div class="container text-center mt-5 pt-5 w-50">
+        <div class="row text-center">
+            <div class="col-sm-12">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <!--Display error msg-->
+                    {% for msg in messages %}
+                    <h4 class='text-center'>{{ msg }}</h4>
+                    {% endfor %}
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {% render_field pform.title class="form-control" placeholder="Give title"%}
+                        </div>
+                        <div class="col-sm-6">
+                            {% render_field pform.post_author class="form-control" placeholder="Post by" %}
+                        </div>
+                    </div><br>
+                        <div class="row">
+                                <div class="col-sm-12">
+                                    {% render_field pform.content class="form-control" placeholder="Write Content Here!!!" style="height: 150px;"%}
+                                </div>
+                        </div>
+                     <button class="btn btn-primary btn-lg mt-3 w-25" type="submit">Publish</button>
+                </form>
+            </div>
+        </div>
+</div>
+{% endblock %}
+</body>
+</html>

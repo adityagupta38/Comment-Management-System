@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+{% extends 'base.html' %}
+<body>
+{% block base %}
+    <div class="container-fluid">
+    <div class="row ">
+        <h1 class="alert alert-primary text-center">
+        <div class="col-sm-12">Welcome To My Blog
+                  <a class="text-muted text-sm-end" href="https://in.linkedin.com/in/adityagupta38?trk=profile-badge" target="_blank" style="font-size: small"> By Aditya Gupta</a>
+        </div>
+        </h1>
+    </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+{% endblock %}
+</body>
+</html>

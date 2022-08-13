@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments</title>
+</head>
+{% extends 'base_home.html' %}
+<body>
+{% load widget_tweaks %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row-cols-sm-auto text-center m-3"><a href="/"> <button type="button" class="btn btn-success w-50">Home</button></a></div>
+    <div class="row">
+    <div class="col-sm-12">
+        <div class="card-header text-center mt-4"><h2 class="alert alert-warning">{{ post.title }}</h2></div>
+        <div class="card-body">
+            <p class="text-muted">{{ post.post_author }} | {{ post.date_posted }}</p>
+            <p class="card-body bg-white">{{ post.content }}</p>
+        </div>
+        <div class="container">
+        <div class="container bg-white p-2 w-75">
+         <form method="post" action="/createcomment{{ post.id }}">
+             {% csrf_token %}
+             {% for msg in messages %}
+                 <h4 class='text-center'>{{ msg }}</h4>
+             {% endfor %}
+             {% render_field cform.comment_author placeholder="Comment by" class="form-control mt-2" %}
+             {% render_field cform.body placeholder="Write Your Comment here!" class="form-control mt-2" style="height: 100px;"%}
+             <button class="btn-primary mt-2" type="submit">Comment</button>
+         </form>
+        </div>
+            <div class="card-footer mt-3">
+                {% if comments %}
+                    <h2 class="alert alert-info text-center">Recent Comments</h2>
+                    {% for comment in comments %}
+                        <div class="row m-3 bg-white">
+                        <div class="col-sm-12">
+                            <h2 class="alert-success mt-2">{{ comment.comment_author }}</h2>
+                            <p class="pt-3">{{ comment.body }}</p>
+                            <p class="text-sm-end text-muted">{{ comment.created_on }}</p>
+                             <div class="row">
+                        <div class="col-sm-6"><a href="/updatecomment{{ comment.id }}"><button class="btn btn-primary w-100" type="submit">edit</button> </a> </div>
+                        <div class="col-sm-6"><a href="deletecomment{{ comment.id }}"><button type="submit" class="btn btn-primary w-100">delete</button> </a> </div>
+                        </div>
+                        </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h4 class="text-center">No Comments Yet</h4>
+                    <a href="/createcomment{{ post.id }}" class="text-decoration-none text-info"><p class="text-muted text-center">Be the first to Comment.</p></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

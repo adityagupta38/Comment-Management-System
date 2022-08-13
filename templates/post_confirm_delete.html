@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>comments</title>
+</head>
+{% extends 'base_home.html' %}
+<body>
+{% block content %}
+    <div class="container text-center mt-5 pt-5 w-50">
+    <h3 class="alert alert-danger">Delete Post</h3>
+    <form method="post">
+        {% csrf_token %}
+        <h2 class="alert-info">Are You Sure?</h2>
+        <button type="submit" class="btn btn-success m-4 w-25">Yes</button>
+        <a href="/"> <button type="button" class="btn btn-danger w-25">No</button></a>
+    </form>
+    </div>
+{% endblock %}
+</body>
+</html>
